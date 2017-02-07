@@ -1,0 +1,2 @@
+javac Phase_1/*.java
+java phase_1.Phase1
