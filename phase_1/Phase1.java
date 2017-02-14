@@ -20,8 +20,8 @@ public class Phase1 {
 
 		highestValueFirst();
 		lowestCostFirst();
-		// highestRatioFirst();
-		PartialKnapsack();
+		highestRatioFirst();
+		partialKnapsack();
 	}
 
 /////////////////////////////////////////////////////////////////////////////
@@ -78,30 +78,23 @@ public class Phase1 {
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-	// public static void highestRatioFirst(){
+	public static void highestRatioFirst(){
 
-	// 	Collections.sort(items, (Node ob1, Node ob2) -> (double)ob2.value/ob2.cost - (double)ob1.value/ob1.cost);
+		Node highest;
+		for(int i = 0; i < items.size(); i++)
+		{
+			highest = items.get(i);
+			for(int j = i; j < items.size(); j++)
+			{
+				if(highest.ratio < items.get(j).ratio)
+				{
+					items.set(i, items.get(j));
+					items.set(j, highest);
+					highest = items.get(i);
+				}
+			}
+		}
 
-	// 	List<String> ns = new ArrayList<String>();
-	// 	int i = 0;
-
-	// 	while(wLimit >= wCount + items.get(i).cost)
-	// 	{
-	// 		ns.add(items.get(i).name);
-	// 		wCount = wCount + items.get(i).cost;
-	// 		i++;
-	// 	}
-	// 	wCount = 0;
-
-	// 	System.out.println(ns);
-	// 	System.out.println(items.size());
-	// }
-
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-	public static void PartialKnapsack(){
-
-		Collections.sort(items, (Node ob1, Node ob2) -> ob2.value - ob1.value);
 
 		List<String> ns = new ArrayList<String>();
 		int i = 0;
@@ -110,18 +103,53 @@ public class Phase1 {
 		{
 			ns.add(items.get(i).name);
 			wCount = wCount + items.get(i).cost;
+			itemValues[2] += items.get(i).value;
+			i++;
+		}
+		wCount = 0;
+
+		System.out.println(ns);
+		System.out.println("highestRatioFirst: " + itemValues[2]);
+	}
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+	public static void partialKnapsack(){
+
+		Node highest;
+		for(int i = 0; i < items.size(); i++)
+		{
+			highest = items.get(i);
+			for(int j = i; j < items.size(); j++)
+			{
+				if(highest.ratio < items.get(j).ratio)
+				{
+					items.set(i, items.get(j));
+					items.set(j, highest);
+					highest = items.get(i);
+				}
+			}
+		}
+
+
+
+		List<String> ns = new ArrayList<String>();
+		int i = 0;
+		while(wLimit >= wCount + items.get(i).cost)
+		{
+			ns.add(items.get(i).name);
+			wCount = wCount + items.get(i).cost;
 			itemValues[3] += items.get(i).value;
 			i++;
 		}
+		ns.add(items.get(i).name);
 
 		int remainingWeight = wLimit - wCount;
-		int remainingValue = (items.get(i).value / items.get(i).cost) * remainingWeight;
-		items.get(i).value -= remainingValue;
-		items.get(i).cost -= remainingWeight;
+		double remainingValue = (items.get(i).ratio) * remainingWeight;
 
-		itemValues[3] += items.get(i).value;
+		itemValues[3] += remainingValue;
 		wCount = 0;
-
+		
 		// These prints are only for visual tracking of information
 		System.out.println(ns);
 		System.out.print("PartialKnapsack: " + (itemValues[3]-remainingValue) + " + " + remainingValue);
@@ -152,6 +180,7 @@ public class Phase1 {
                 temp.name = data[0];
                 temp.cost = Integer.parseInt(data[1]);
                 temp.value = Integer.parseInt(data[2]);
+                temp.getRatio();
 
                 list.add(temp);
                 items = list;
