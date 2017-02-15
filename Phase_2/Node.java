@@ -5,7 +5,8 @@ public class Node{
 	public int cost;
 	public int value;
 	Node left;
-	Node right;	
+	Node right;
+
 	public Node(String name, int cost, int value){
 		this.name = name;
 		this.cost = cost;
