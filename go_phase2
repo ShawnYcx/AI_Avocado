@@ -1,2 +1,2 @@
 javac Phase_2/*.java
-java phase_2.SearchTree
+java Phase_2.Phase2
