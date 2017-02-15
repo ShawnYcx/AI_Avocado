@@ -21,10 +21,12 @@ public class Phase2 {
         List<Integer> holder = new ArrayList<Integer>();
         StringTokenizer tokenizer = new StringTokenizer(content, ",");
         int cost = 0, value = 0;
+        String temp;
 
         while (tokenizer.hasMoreTokens()) {
+            temp = tokenizer.nextToken();
             for (int i = 0; i < items.size(); i++) {
-                if (tokenizer.nextToken() == items.get(i).name){
+                if (temp == items.get(i).name){
                     cost += items.get(i).cost;
                     value += items.get(i).value;
                 }
@@ -36,19 +38,24 @@ public class Phase2 {
     }
 
     public static void getOptimaltotal() {
+        treeHeight--;
         Node newNode = new Node("", 0, 0, 0);
+        List<Integer> holder;
+        
         for(int i = (int)Math.pow(2,treeHeight)-1; i <= (int)Math.pow(2,treeHeight+1)-2; i++){
-            List<Integer> holder = new ArrayList<Integer>();
             
             // Error here
             System.out.println(tree.get(i));
-            holder = getNodeContents(tree.get(i));
+            if(tree.get(i) != ""){
+            	holder = getNodeContents(tree.get(i));
+            
             // Error here
             
                 if (holder.get(0) <= costLimit && holder.get(1) > newNode.value){
                 newNode.name = tree.get(i);
                 newNode.cost = holder.get(0);
                 newNode.value = holder.get(1);
+            	}
             }
         }
 
