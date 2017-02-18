@@ -11,13 +11,8 @@ public class Phase3 {
 	private static int costLimit;
 
 	public static void main(String[] args) throws Exception{
-		// make_tree("phase_3/k05.csv");
-		//System.out.println(tree);
-
-        // getOptimaltotal();
-
-        make_tree("phase_3/k24.csv");
-		//System.out.println(tree);
+		
+        make_tree("resources/k05.csv");
 
         getOptimaltotal();
 	}
@@ -64,14 +59,28 @@ public class Phase3 {
         }
 
         System.out.print("The Optimal solution is [" + newNode.name + "] with the cost of ");
-        System.out.print(newNode.cost + " and the value of " + newNode.value);
+        System.out.println(newNode.cost + " and the value of " + newNode.value);
 
     }   
 
+
+    // public static int totalCost(String seq) {
+
+    //     int tCost = 0;
+    //     for(int i = 0; seq.length; i++){
+
+    //         for(int j = 0; items.size(); j++){
+
+
+    //         }
+    //     }
+    // }
+
+
 	public static void make_tree(String file) throws Exception {
 
-		tree.add("");
-
+		tree.add(null);
+ 
 		String csvFile = new File(file).getAbsolutePath();
         BufferedReader br = null;
         String line = "";
@@ -93,19 +102,24 @@ public class Phase3 {
             
             items.add(newNode);
 
-            // for (int i = 0;i < items.size(); i++) {
-            //     System.out.println(i + ": " + items.get(i).name);
-            //     System.out.println(i + ": " + items.get(i).cost);
-            //     System.out.println(i + ": " + items.get(i).value);
-            // }
-            
             for(int i = (int)Math.pow(2,treeHeight)-1; i <= (int)Math.pow(2,treeHeight+1)-2; i++){
 
+                int parentNode = getNodeContents(tree.get((i-1)/2)).get(0);
             	if(i % 2 == 1){
-            		tree.add(tree.get((i-1)/2));
+            		if(getNodeContents(tree.get((i-1)/2)).get(0) <= costLimit){
+                        tree.add(tree.get((i-1)/2));
+                    }
+                    else{
+                        tree.add("");
+                    }
             	}
             	else{
-            		tree.add(tree.get((i-1)/2) + "," + data[0]);
+            		if(getNodeContents(tree.get((i-1)/2) + "," + data[0]).get(0) <= costLimit){
+                        tree.add(tree.get((i-1)/2) + "," + data[0]);
+                    }
+                    else{
+                        tree.add("");
+                    }
             	}
             }
 

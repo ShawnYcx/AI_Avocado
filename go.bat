@@ -10,6 +10,6 @@ if not exist .\%arg1% (
 
 javac %arg1%\*.java
 
-if %flag%==0 java -cp "." %arg1%.Phase%arg1:~-1%
+if %errorlevel%==0 java -cp "." %arg1%.Phase%arg1:~-1%
 
 :NODIR
