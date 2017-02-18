@@ -16,7 +16,7 @@ public class Phase1 {
 		// csvParser("phase_1\\k05.csv");
 
 		// This lins for MacOSX
-		csvParser("Phase_1/k05.csv");
+		csvParser("Phase_1/k24.csv");
 
 		highestValueFirst();
 		lowestCostFirst();

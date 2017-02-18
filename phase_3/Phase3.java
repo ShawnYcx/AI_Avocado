@@ -1,9 +1,9 @@
-package Phase_2;
+package phase_3;
 
 import java.io.*;
 import java.util.*;
 
-public class Phase2 {
+public class Phase3 {
 
 	private static List<String> tree = new ArrayList<String>();
     private static List<Node> items = new ArrayList<Node>();
@@ -11,12 +11,12 @@ public class Phase2 {
 	private static int costLimit;
 
 	public static void main(String[] args) throws Exception{
-		// make_tree("Phase_2/k05.csv");
+		// make_tree("phase_3/k05.csv");
 		//System.out.println(tree);
 
         // getOptimaltotal();
 
-        make_tree("resources/k05.csv");
+        make_tree("phase_3/k24.csv");
 		//System.out.println(tree);
 
         getOptimaltotal();
@@ -64,7 +64,7 @@ public class Phase2 {
         }
 
         System.out.print("The Optimal solution is [" + newNode.name + "] with the cost of ");
-        System.out.println(newNode.cost + " and the value of " + newNode.value);
+        System.out.print(newNode.cost + " and the value of " + newNode.value);
 
     }   
 
