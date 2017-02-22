@@ -12,9 +12,15 @@ public class Phase3 {
 
 	public static void main(String[] args) throws Exception{
 		
-        make_tree("resources/k05.csv");
+        make_tree("resources/k24.csv");
+
+        final long start_time = System.currentTimeMillis();
 
         getOptimaltotal();
+
+        final long end_time = System.currentTimeMillis() - start_time;
+
+        System.out.println(end_time*.001);
 	}
 
     public static List<Integer> getNodeContents(String content){
@@ -79,7 +85,7 @@ public class Phase3 {
 
 	public static void make_tree(String file) throws Exception {
 
-		tree.add(null);
+		tree.add("");
  
 		String csvFile = new File(file).getAbsolutePath();
         BufferedReader br = null;

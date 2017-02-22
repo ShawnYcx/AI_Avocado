@@ -1,4 +1,4 @@
-package Phase_2;
+package phase_2;
 
 import java.io.*;
 import java.util.*;
@@ -16,10 +16,16 @@ public class Phase2 {
 
         // getOptimaltotal();
 
-        make_tree("resources/k05.csv");
+        make_tree("resources/k24.csv");
 		//System.out.println(tree);
 
+        final long start_time = System.currentTimeMillis();
+
         getOptimaltotal();
+
+        final long end_time = System.currentTimeMillis() - start_time;
+
+        System.out.println(end_time*.001);
 	}
 
     public static List<Integer> getNodeContents(String content){
