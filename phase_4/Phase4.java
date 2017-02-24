@@ -20,19 +20,21 @@ public class Phase4 {
 
 	public static void main(String[] args) throws Exception{
 		
+        PrintStream file = new PrintStream(new FileOutputStream("data.txt"));
+
         make_tree1();
 
-        output_fileName();
+        file.println(output_fileName());
 
-        output_capacity();
+        file.println(output_capacity());
 
-        output_bounds();
+        file.println(output_bounds());
 
         begin = System.currentTimeMillis();
         getOptimaltotal();
         end = System.currentTimeMillis();
 
-        output_totalTime("dumb",end - begin);
+        file.println(output_totalTime("dumb",end - begin));
 
         reinitialize_tree();
 
@@ -42,7 +44,9 @@ public class Phase4 {
         getOptimaltotal();
         end = System.currentTimeMillis();
 
-        output_totalTime("smart", end - begin);
+        file.println(output_totalTime("smart", end - begin));
+
+        file.close();
 
 
 
@@ -189,6 +193,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 	public static void highestValueFirst(){
 		
+		begin = System.currentTimeMillis();
 		Collections.sort(items, (Node ob1, Node ob2) -> ob2.value - ob1.value);
 
 		ns = new ArrayList<String>();
@@ -204,6 +209,8 @@ public class Phase4 {
 		sort(ns);
 
 		cCount = 0;
+		end = System.currentTimeMillis();
+		System.out.println(end - begin);
 	}
 
 
@@ -211,7 +218,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 	public static void lowestCostFirst(){
 
-
+		begin = System.currentTimeMillis();
 		Collections.sort(items, (Node ob1, Node ob2) -> ob1.cost - ob2.cost);
 
 		ns = new ArrayList<String>();
@@ -225,6 +232,8 @@ public class Phase4 {
 			i++;
 		}
 		cCount = 0;
+		end = System.currentTimeMillis();
+		System.out.println(end - begin);
 		sort(ns);     
 
 	}
@@ -235,6 +244,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 	public static void highestRatioFirst(){
 
+		begin = System.currentTimeMillis();
 		Node highest;
 		for(int i = 0; i < items.size(); i++)
 		{
@@ -262,6 +272,8 @@ public class Phase4 {
 			i++;
 		}
 		cCount = 0;
+		end = System.currentTimeMillis();
+		System.out.println(end - begin);
 		sort(ns);
 
 	}
@@ -270,6 +282,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 	public static void partialKnapsack(){
 
+		begin = System.currentTimeMillis();
 		Node highest;
 		for(int i = 0; i < items.size(); i++)
 		{
@@ -303,6 +316,8 @@ public class Phase4 {
 
 		itemValues[3] += remainingValue;
 		cCount = 0;
+		end = System.currentTimeMillis();
+		System.out.println(end - begin);
 		sort(ns);
 	}
 
@@ -325,7 +340,6 @@ public class Phase4 {
 		if(itemValues[2] < min){
 			minBound = ns;
 		}
-		System.out.println(ns);
 
 		partialKnapsack();
 		maxBound = ns;
@@ -357,27 +371,26 @@ public class Phase4 {
 		treeHeight = 1;
 	}
 
-	public static void output_fileName() {
+	public static String output_fileName() {
 
-		System.out.println("The filename is: \n" + fileName + "\n");
+		return "The filename is: \n" + fileName + "\n";
 	}
 
-	public static void output_capacity() {
+	public static String output_capacity() {
 
-		System.out.println("The capacity for the given problem is: \n" + costLimit + "\n");
+		return "The capacity for the given problem is: \n" + costLimit + "\n";
 	}
 
-	public static void output_bounds() {
+	public static String output_bounds() {
 
 		calculate_bound();
 
-		System.out.println("The best greedy min boundary is: \n" + minBound + "\n");
-
-		System.out.println("The best greedy max boundary is: \n" + maxBound + "\n");
+		return "The best greedy min boundary is: \n" + minBound + "\nThe best greedy max boundary is: \n" + maxBound + "\n";
 	}
 
-	public static void output_totalTime(String type,long time) {
+	public static String output_totalTime(String type,long time) {
 
-		System.out.println("\nTotal time for \""+type+"\" search: " + time*.001);
+		return "\nTotal time for \""+type+"\" search: " + time*.001;
 	}
+
 }

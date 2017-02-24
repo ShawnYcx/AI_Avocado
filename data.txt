@@ -1,0 +1,15 @@
+The filename is: 
+k24.csv
+
+The capacity for the given problem is: 
+60
+
+The best greedy min boundary is: 
+[a, g, h, i, j, k, q, r, s, t, u, x]
+The best greedy max boundary is: 
+[a, c, e, f, g, i, j, k, m, o, p, s, t, u, v, w, x]
+
+
+Total time for "dumb" search: 24.534
+
+Total time for "smart" search: 45603.639
