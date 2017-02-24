@@ -5,11 +5,15 @@ The capacity for the given problem is:
 60
 
 The best greedy min boundary is: 
-[a, g, h, i, j, k, q, r, s, t, u, x]
+Value: 87
+Cost: 57
+Item list: [a, g, h, i, j, k, q, r, s, t, u, x]
+
 The best greedy max boundary is: 
-[a, c, e, f, g, i, j, k, m, o, p, s, t, u, v, w, x]
+Value: 96
+Cost: 60
+Item list: [a, c, e, f, g, i, j, k, m, o, p, s, t, u, v, w, x]
 
+Total time for "dumb" search: 29.743000000000002s
 
-Total time for "dumb" search: 24.534
-
-Total time for "smart" search: 45603.639
+Total time for "smart" search: 25.109s

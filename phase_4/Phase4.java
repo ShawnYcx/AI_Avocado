@@ -24,7 +24,7 @@ public class Phase4 {
 	public static void main(String[] args) throws Exception{
 		
         PrintStream file = new PrintStream(new FileOutputStream("data.txt"));
-
+        System.out.println("Begin: Initilizing things...");
         make_tree1();
 
         file.println(output_fileName());
@@ -32,24 +32,28 @@ public class Phase4 {
         file.println(output_capacity());
 
         file.println(output_bounds());
-
+        System.out.println("Current Process: dumb...");
         begin = System.currentTimeMillis();
         getOptimaltotal();
         end = System.currentTimeMillis();
 
         file.println(output_totalTime("dumb",end - begin));
+        System.out.println("dumb [Completed]\n");
 
         reinitialize_tree();
-
+        System.out.println("Current Process: smart...");
         make_tree2();
 
         begin = System.currentTimeMillis();
         getOptimaltotal();
         end = System.currentTimeMillis();
-
+        
         file.println(output_totalTime("smart", end - begin));
+        System.out.println("smart [Completed]\n");
 
         file.close();
+
+        System.out.println("Completed");
 	}
 
     public static List<Integer> getNodeContents(String content){
@@ -192,7 +196,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 	public static void highestValueFirst(){
-		
+		System.out.println("Current Process: highestValueFirst.");
 		begin = System.currentTimeMillis();
 		Collections.sort(items, (Node ob1, Node ob2) -> ob2.value - ob1.value);
 
@@ -211,14 +215,15 @@ public class Phase4 {
 
 		cCount = 0;
 		end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		// System.out.println(end - begin);
+		System.out.println("highestValueFirst [Completed]\n");
 	}
 
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 	public static void lowestCostFirst(){
-
+		System.out.println("Current Process: lowestCostFirst.");
 		begin = System.currentTimeMillis();
 		Collections.sort(items, (Node ob1, Node ob2) -> ob1.cost - ob2.cost);
 
@@ -236,9 +241,9 @@ public class Phase4 {
 		itemCost[1] = cCount;
 		cCount = 0;
 		end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		// System.out.println(end - begin);
 		sort(ns);     
-
+		System.out.println("lowestCostFirst [Completed]\n");
 	}
 
 
@@ -246,7 +251,7 @@ public class Phase4 {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 	public static void highestRatioFirst(){
-
+		System.out.println("Current Process: highestRatioFirst.");
 		begin = System.currentTimeMillis();
 		Node highest;
 		for(int i = 0; i < items.size(); i++)
@@ -277,15 +282,16 @@ public class Phase4 {
 		itemCost[2] = cCount;
 		cCount = 0;
 		end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		// System.out.println(end - begin);
 		sort(ns);
 
+		System.out.println("highestRatioFirst [Completed]\n");
 	}
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 	public static void partialKnapsack(){
-
+		System.out.println("Current Process: partialKnapsack.");
 		begin = System.currentTimeMillis();
 		Node highest;
 		for(int i = 0; i < items.size(); i++)
@@ -322,8 +328,9 @@ public class Phase4 {
 		
 		cCount = 0;
 		end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		// System.out.println(end - begin);
 		sort(ns);
+		System.out.println("partialKnapsack [Completed]\n");
 	}
 
 	public static void calculate_bound() {
@@ -395,8 +402,10 @@ public class Phase4 {
 	public static String output_bounds() {
 
 		calculate_bound();
-		String outputResults = "The best greedy min boundary is: \n" + minBound + "\nCost:" + itemCost[costIndex] + "\nValue: " + itemValues[valIndex];
-		String outputMaxResults = "\nThe best greedy max boundary is: \n" + maxBound + "\nCost: " + costLimit + "\nValue: " + itemValues[3];
+		String outputResults = "The best greedy min boundary is: \nValue: " + itemValues[valIndex] + "\nCost: " + itemCost[costIndex] + "\nItem list: " + minBound;
+		
+		String outputMaxResults = "\n\nThe best greedy max boundary is: \nValue: " + itemValues[3] + "\nCost: " + costLimit + "\nItem list: " + maxBound;
+		
 		outputResults += outputMaxResults;
 
 		return outputResults;
