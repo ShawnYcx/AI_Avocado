@@ -20,6 +20,7 @@ public class Phase4 {
 	private static String fileName = "k24.csv";
 	private static long begin;
 	private static long end;
+	private static Node optimal;
 
 	public static void main(String[] args) throws Exception{
 		
@@ -36,6 +37,8 @@ public class Phase4 {
         begin = System.currentTimeMillis();
         getOptimaltotal();
         end = System.currentTimeMillis();
+
+        file.println(output_optimal());
 
         file.println(output_totalTime("dumb",end - begin));
         System.out.println("dumb [Completed]\n");
@@ -97,6 +100,7 @@ public class Phase4 {
             }
         }
 
+        optimal = newNode;
     }   
 
 
@@ -410,6 +414,13 @@ public class Phase4 {
 
 		return outputResults;
 	}
+
+
+	public static String output_optimal() {
+
+		return "\nThe optimal solution is:\nValue: " + optimal.value + "\nCost: " + optimal.cost + "\nItem list: [" + optimal.name.substring(1) + "]";
+	}
+
 
 	public static String output_totalTime(String type,long time) {
 
