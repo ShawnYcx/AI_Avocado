@@ -8,12 +8,15 @@ public class Phase4 {
 	private static List<String> tree = new ArrayList<String>();
     private static List<Node> items = new ArrayList<Node>();
     private static int[] itemValues = new int[4];
+    private static int[] itemCost = new int[4];
 	private static int treeHeight = 1;
 	private static int costLimit;
 	private static int cCount = 0;
 	private static List<String> ns;
 	private static List<String> minBound;
 	private static List<String> maxBound;
+	private static int costIndex;
+	private static int valIndex;
 	private static String fileName = "k24.csv";
 	private static long begin;
 	private static long end;
@@ -47,9 +50,6 @@ public class Phase4 {
         file.println(output_totalTime("smart", end - begin));
 
         file.close();
-
-
-
 	}
 
     public static List<Integer> getNodeContents(String content){
@@ -206,6 +206,7 @@ public class Phase4 {
 			itemValues[0] += items.get(i).value;
 			i++;
 		}
+		itemCost[0] = cCount;
 		sort(ns);
 
 		cCount = 0;
@@ -231,6 +232,8 @@ public class Phase4 {
 			itemValues[1] += items.get(i).value;
 			i++;
 		}
+
+		itemCost[1] = cCount;
 		cCount = 0;
 		end = System.currentTimeMillis();
 		System.out.println(end - begin);
@@ -271,6 +274,7 @@ public class Phase4 {
 			itemValues[2] += items.get(i).value;
 			i++;
 		}
+		itemCost[2] = cCount;
 		cCount = 0;
 		end = System.currentTimeMillis();
 		System.out.println(end - begin);
@@ -315,6 +319,7 @@ public class Phase4 {
 		double remainingValue = (items.get(i).ratio) * remainingWeight;
 
 		itemValues[3] += remainingValue;
+		
 		cCount = 0;
 		end = System.currentTimeMillis();
 		System.out.println(end - begin);
@@ -328,16 +333,22 @@ public class Phase4 {
 		highestValueFirst();
 		minBound = ns;
 		min = itemValues[0];
+		valIndex = 0;
+		costIndex = 0;
 
 
 		lowestCostFirst();
 		if(itemValues[1] < min){
 			min = itemValues[1];
+			valIndex = 1;
+			costIndex = 1;
 			minBound = ns;
 		}
 
 		highestRatioFirst();
 		if(itemValues[2] < min){
+			valIndex = 2;
+			costIndex = 2;
 			minBound = ns;
 		}
 
@@ -384,13 +395,16 @@ public class Phase4 {
 	public static String output_bounds() {
 
 		calculate_bound();
+		String outputResults = "The best greedy min boundary is: \n" + minBound + "\nCost:" + itemCost[costIndex] + "\nValue: " + itemValues[valIndex];
+		String outputMaxResults = "\nThe best greedy max boundary is: \n" + maxBound + "\nCost: " + costLimit + "\nValue: " + itemValues[3];
+		outputResults += outputMaxResults;
 
-		return "The best greedy min boundary is: \n" + minBound + "\nThe best greedy max boundary is: \n" + maxBound + "\n";
+		return outputResults;
 	}
 
 	public static String output_totalTime(String type,long time) {
 
-		return "\nTotal time for \""+type+"\" search: " + time*.001;
+		return "\nTotal time for \""+type+"\" search: " + time*.001+"s";
 	}
 
 }
