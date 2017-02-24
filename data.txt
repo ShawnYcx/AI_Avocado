@@ -19,6 +19,4 @@ Value: 99
 Cost: 60
 Item list: [a,e,g,i,j,k,o,p,q,s,t,u,v,w,x]
 
-Total time for "dumb" search: 24.715s
-
-Total time for "smart" search: 18.653s
+Total time for "dumb" search: 27.828s

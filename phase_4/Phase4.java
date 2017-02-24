@@ -329,7 +329,7 @@ public class Phase4 {
 		double remainingValue = (items.get(i).ratio) * remainingWeight;
 
 		itemValues[3] += remainingValue;
-		
+		itemCost[3] = remainingWeight + cCount;
 		cCount = 0;
 		end = System.currentTimeMillis();
 		// System.out.println(end - begin);
@@ -408,7 +408,7 @@ public class Phase4 {
 		calculate_bound();
 		String outputResults = "The best greedy min boundary is: \nValue: " + itemValues[valIndex] + "\nCost: " + itemCost[costIndex] + "\nItem list: " + minBound;
 		
-		String outputMaxResults = "\n\nThe best greedy max boundary is: \nValue: " + itemValues[3] + "\nCost: " + costLimit + "\nItem list: " + maxBound;
+		String outputMaxResults = "\n\nThe best greedy max boundary is: \nValue: " + itemValues[3] + "\nCost: " + itemCost[3] + "\nItem list: " + maxBound;
 		
 		outputResults += outputMaxResults;
 
